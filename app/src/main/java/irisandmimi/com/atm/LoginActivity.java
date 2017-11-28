@@ -1,11 +1,11 @@
 package irisandmimi.com.atm;
 
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -13,17 +13,22 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+    }
+    public void login(View view){
+        EditText edUsrid = (EditText)findViewById(R.id.userid);
+        EditText edPaswd = (EditText)findViewById(R.id.passwd);
+        String userid = edUsrid.getText().toString();
+        String passwd = edPaswd.getText().toString();
+        if("mimi".equals(userid) && "8787".equals(passwd)){
+            Toast.makeText(this,"登入成功", Toast.LENGTH_LONG).show();
+        }else{
+            new AlertDialog.Builder(this)
+                    .setTitle("登入")
+                    .setMessage("登入失敗")
+                    .setPositiveButton("Ok",null)
+                    .show();
+        }
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
 }
