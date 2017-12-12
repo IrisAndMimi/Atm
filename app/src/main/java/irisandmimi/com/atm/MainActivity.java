@@ -10,23 +10,44 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import static irisandmimi.com.atm.R.id.userid;
 
 public class MainActivity extends AppCompatActivity {
-    private final static int REQUEST_LOGIN = 102;
     boolean logon = false;
+    private final static int REQUEST_LOGIN = 102;
+    private final static int REQUEST_USERINFO = 103;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_LOGIN){
-            if (resultCode == RESULT_OK){
-                String uid = data.getStringExtra("LOGIN_USERID");
-                String pw = data.getStringExtra("LOGIN_PASSWD");
-                Log.d("RESULT", uid + "/" + pw);
-            }else{
-                finish();
+        switch(requestCode){
+            case REQUEST_LOGIN:
+                if (resultCode == RESULT_OK){
+                    String uid = data.getStringExtra("LOGIN_USERID");
+                    String pw = data.getStringExtra("LOGIN_PASSWD");
+                    Log.d("RESULT", uid + "/" + pw);
+                    Toast.makeText(this, "Login userid: "+ uid, Toast.LENGTH_LONG).show();
+                    getSharedPreferences("atm", MODE_PRIVATE)
+                            .edit()
+                            .putString("USERID", uid)
+                            .apply();
+                }else{
+                    finish();
+                }
+                break;
+                case REQUEST_USERINFO:
+                    if (resultCode == RESULT_OK){
+                        String nicknam = data.getStringExtra("EXTRA_NICKNAME");
+                        String phone = data.getStringExtra("EXTRA_PHONE");
+                        Toast.makeText(this, "Nickname: "+ nicknam, Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, "Phone: "+ phone, Toast.LENGTH_LONG).show();
+                    }
+                    break;
             }
         }
+
     }
 
     @Override
