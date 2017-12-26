@@ -1,5 +1,6 @@
 package irisandmimi.com.atm;
 
+import android.content.Intent;
 import android.nfc.Tag;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ public class UserInfoActivity extends AppCompatActivity {
     EditText edUsrph;
     private static final String TAG = UserInfoActivity.class.getSimpleName();
     private Spinner ages;
+    private final static int REQUEST_ADDRESS = 104;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +42,10 @@ public class UserInfoActivity extends AppCompatActivity {
         getIntent().putExtra("EXTRA_PHONE", phone);
         setResult(RESULT_OK, getIntent());
         finish();
+    }
+    public void addr(View view){
+        Intent intent = new Intent(UserInfoActivity.this, AddrActivity.class);
+        startActivityForResult(intent,REQUEST_ADDRESS);
     }
 
 }
