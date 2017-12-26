@@ -29,6 +29,16 @@ public class AddrActivity extends AppCompatActivity {
                 if (position ==0){
                     data = new String[]{"1","2"};
                 }
+                if (position ==1){
+                    data = new String[]{"3","4"};
+                }
+                if (position ==2){
+                    data = new String[]{"5","6"};
+                }
+                ArrayAdapter adapter1 = new ArrayAdapter(
+                  AddrActivity.this, android.R.layout.simple_list_item_1
+                  , data);
+                spArea.setAdapter(adapter1);
             }
 
             @Override

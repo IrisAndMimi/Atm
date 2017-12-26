@@ -44,8 +44,9 @@ public class UserInfoActivity extends AppCompatActivity {
         finish();
     }
     public void addr(View view){
-        Intent intent = new Intent(UserInfoActivity.this, AddrActivity.class);
-        startActivityForResult(intent,REQUEST_ADDRESS);
+        startActivity(new Intent(this, CityActivity.class));
+//        Intent intent = new Intent(UserInfoActivity.this, AddrActivity.class);
+//        startActivityForResult(intent,REQUEST_ADDRESS);
     }
 
 }
